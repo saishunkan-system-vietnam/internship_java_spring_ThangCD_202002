@@ -1,10 +1,10 @@
-# internship_java_spring_ThangCD_202002
+# internship_php_mvc_ThangCD_202002
 	Thực tập PHP Core - Tạo chức năng CRUD đơn giản
 
 ## Môi trường phát triển
 	Xampp PHP 7.3
 	PHP Core + MVC
-	DB MYSQL 5.7 trở lên
+	DB MYSQL 8
 
 ## Nội dung
 

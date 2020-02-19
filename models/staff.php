@@ -61,13 +61,34 @@ class Staff
         }
     }
 
-    public function update(){
+    public function update($id, $id_department,$username, $password, $fullname, $birthday, $phone, $email){
+        $db = DB::getInstance();
+        $req = $db->prepare("UPDATE staff SET id_department = '$id_department', username = '$username', password = '$password', fullname = '$fullname', birthday = '$birthday', phone = '$phone', email = '$email' WHERE id = '$id'");
 
+        $req->execute();
+        header("location:index.php?controller=staff&action=index");
+    }
+
+    public function delete($id){
+        $db = DB::getInstance();
+
+        $req = $db->prepare("DELETE FROM staff WHERE id = '$id'");
+        if ($req->execute()){
+            header('location:index.php?controller=staff&action=index');
+        }
     }
 
     public function login($username, $password){
        $db = DB::getInstance();
-       $req = $db->prepare("SELECT * FROM staff WHERE username = '$username' AND password='$password'");
+       $req = $db->prepare("SELECT * FROM staff WHERE username = '".$username."' AND password = '".$password."' ");
        $req->execute();
+
+    }
+
+    public function search($key){
+        $db = DB::getInstance();
+
+        $req = $db->prepare("SELECT * FORM staff WHERE username REGEXP '$key' OR fullname REGEXP '$key'");
+        $req->execute();
     }
 }

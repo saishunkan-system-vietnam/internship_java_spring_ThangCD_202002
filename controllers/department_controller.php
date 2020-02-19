@@ -20,8 +20,7 @@ class DepartmentController extends BaseController
     public function add(){
         if (isset($_POST['add_depart'])){
             $name = $_POST['name'];
-
-            $depart = Department::add($name);
+            Department::add($name);
         }
         $this->render('add');
     }
@@ -33,16 +32,16 @@ class DepartmentController extends BaseController
 
         if (isset($_POST['update_depart'])){
             $name = $_POST['name'];
-            $db = Department::update($id, $name);
+            Department::update($id, $name);
         }
 
         $this->render('show', $data);
     }
 
     public function delete(){
-        $id = $_GET['id'];
-        $db = Department::del($id);
-        $data = array('department' => $db);
-        $this->render('index', $data);
+        if(isset($_GET['id'])){
+            $id = $_GET['id'];
+            Department::delete($id);
+        }
     }
 }

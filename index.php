@@ -10,7 +10,7 @@ if (isset($_GET['controller'])) {
     }
 } else {
     $controller = 'pages';
-    $action = 'home';
+    $action = 'login';
 }
 require_once('route.php');
 

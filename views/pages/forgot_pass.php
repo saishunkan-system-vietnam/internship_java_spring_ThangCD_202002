@@ -120,7 +120,7 @@
         transform: scale(0.95);
     }
 
-    input[type=text], input[type=password] {
+    input[type=email] {
         background-color: #f6f6f6;
         border: none;
         color: #0d0d0d;
@@ -274,35 +274,17 @@
 
         <!-- Icon -->
         <div class="fadeIn first" style="padding: 20px;">
-            <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="LOGIN" />
+            <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="SEND MAIL" />
         </div>
-        <?php
-        $errUsername = $errPassword = '';
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            if(empty($_POST["username"])) {
-                $errUsername='Mời bạn nhập tên';
-            } else {
-                $username =  $_POST["username"];
-            }
-            if(empty($_POST["password"])) {
-                $errPassword='Mời bạn nhập mật khẩu';
-            } else {
-                $password =  $_POST["password"];
-            }
-        }
-        ?>
         <!-- Login Form -->
-        <form METHOD="POST" enctype="multipart/form-data">
-            <input type="text" id="username" class="fadeIn second" name="username" placeholder="Username"></br>
-            <span style="color: red"><?php echo $errUsername?></span>
-            <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password"></br>
-            <span style="color: red"><?php echo $errPassword?></span></br>
-            <input type="submit" name="login" class="fadeIn fourth" value="Log In">
+        <form METHOD="POST" action="">
+            <input type="email" id="email" class="fadeIn second" name="email" placeholder="Email"></br>
+            <input type="submit" name="fogot" class="fadeIn fourth" name="forgot" value="SEND">
         </form>
 
-        <!-- Remind Passowrd -->
+        <!-- hom page-->
         <div id="formFooter">
-            <a class="underlineHover" href="index.php?controller=pages&action=forgotpassword">Forgot Password?</a>
+            <a class="underlineHover" href="index.php">Home</a>
         </div>
     </div>
 </div>

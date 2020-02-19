@@ -57,10 +57,12 @@ class Department
         header('Location:index.php?controller=department&action=index');
     }
 
-    public function del($id){
+    public function delete($id){
         $db = DB::getInstance();
 
         $req = $db->prepare("DELETE FROM department WHERE id = '$id'");
-        $req->execute();
+        if ($req->execute()){
+            header('location:index.php?controller=department&action=index');
+        }
     }
 }

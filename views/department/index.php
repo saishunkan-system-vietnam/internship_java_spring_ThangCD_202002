@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    if (isset($_SESSION["username"])){
+        $name_s = $_SESSION["username"];
+    }
+?>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="<?php echo 'index.php?controller=pages&action=home'?>">Home</a>
@@ -26,7 +32,7 @@
 <table class="table table-striped">
     <thead>
     <tr>
-        <th>STT</th>
+        <th>ID</th>
         <th>Tên phòng</th>
         <th>Chức năng</th>
     </tr>
@@ -37,7 +43,7 @@
             <td><?php echo $d->id ?></td>
             <td><?php echo $d->name ?></td>
             <td>
-                <a href="" class="btn btn-primary">Xem</a>
+                <a href="index.php?controller=department&action=show&id=<?php echo $d->id?>" class="btn btn-primary">Xem</a>
                 <a href="index.php?controller=department&action=show&id=<?php echo $d->id?>" class="btn btn-secondary">Sửa</a>
                 <a href="index.php?controller=department&action=delete&id=<?php echo $d->id?>" class="btn btn-danger">Xóa</a>
             </td>

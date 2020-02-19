@@ -8,5 +8,6 @@
     <title>DEMO PHP MVC</title>
 </head>
 <body>
+<?= @$content ?>
 </body>
 </html>

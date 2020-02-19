@@ -19,8 +19,21 @@ class StaffController extends BaseController
     }
 
     public function show(){
+        $depart = Department::all();
+        $id = $_GET['id'];
         $staff = Staff::find($_GET['id']);
-        $data = array('staff' => $staff);
+        $data = array('staff' => $staff, 'depart' => $depart);
+
+        if (isset($_POST['update_staff'])){
+            $id_department = $_POST['id_department'];
+            $username = $_POST['username'];
+            $password = md5($_POST['password']);
+            $fullname = $_POST['fullname'];
+            $birthday = $_POST['birthday'];
+            $phone = $_POST['phone'];
+            $email = $_POST['email'];
+            Staff::update($id, $id_department, $username, $password, $fullname, $birthday, $phone, $email);
+        }
         $this->render('show', $data);
     }
 
@@ -40,5 +53,23 @@ class StaffController extends BaseController
 
         }
        $this->render('add', $data);
+    }
+
+    public function search(){
+        $sear = $_GET['keyword'];
+        $result = Staff::search($sear);
+        var_dump($result);
+        $data = array('result' => $result);
+        $this->render('search', $data);
+    }
+
+    /**
+     * @return string
+     */
+    public function delete(){
+        if (isset($_GET['id'])){
+            $id = $_GET['id'];
+            Staff::delete($id);
+        }
     }
 }

@@ -30,12 +30,12 @@
         <form class="form-inline" action="" method="get">
             <label for="email">Tìm kiếm</label>
             <input type="text" class="form-control" placeholder="Nhập tên" name="keyword">
-<!--            <label for="pwd">Phòng:</label>-->
-<!--            <input type="text" class="form-control" placeholder="Phòng" >-->
-<!--            <label for="pwd">SĐT:</label>-->
-<!--            <input type="text" class="form-control" placeholder="Số điện thoại" >-->
-<!--            <label for="pwd">Email:</label>-->
-<!--            <input type="text" class="form-control" placeholder="Email" >-->
+            <!--            <label for="pwd">Phòng:</label>-->
+            <!--            <input type="text" class="form-control" placeholder="Phòng" >-->
+            <!--            <label for="pwd">SĐT:</label>-->
+            <!--            <input type="text" class="form-control" placeholder="Số điện thoại" >-->
+            <!--            <label for="pwd">Email:</label>-->
+            <!--            <input type="text" class="form-control" placeholder="Email" >-->
             <button type="submit" class="btn btn-primary">Tìm kiếm</button>
         </form>
     </div>
@@ -52,19 +52,19 @@
     </tr>
     </thead>
     <tbody>
-    <?php foreach ($staff as $s):?>
-    <tr>
-        <td><?php echo $s->fullname ?></td>
-        <td><?php echo $s->id_department ?></td>
-        <td><?php echo $s->birthday ?></td>
-        <td><?php echo '0'.$s->phone ?></td>
-        <td><?php echo $s->email ?></td>
-        <td>
-            <a href="index.php?controller=staff&action=show&id=<?php echo $s->id?>" class="btn btn-primary">Xem</a>
-            <a href="index.php?controller=staff&action=show&id=<?php echo $s->id?>" class="btn btn-secondary">Sửa</a>
-            <a href="index.php?controller=staff&action=delete&id=<?php echo $s->id?>" class="btn btn-danger">Xóa</a>
-        </td>
-    </tr>
-   <?php endforeach;?>
+    <?php foreach ($result as $r):?>
+        <tr>
+            <td><?php echo $r->fullname ?></td>
+            <td><?php echo $r->id_department ?></td>
+            <td><?php echo $r->birthday ?></td>
+            <td><?php echo '0'.$r->phone ?></td>
+            <td><?php echo $r->email ?></td>
+            <td>
+                <a href="index.php?controller=staff&action=show&id=<?php echo $r->id?>" class="btn btn-primary">Xem</a>
+                <a href="index.php?controller=staff&action=show&id=<?php echo $r->id?>" class="btn btn-secondary">Sửa</a>
+                <a href="index.php?controller=staff&action=delete&id=<?php echo $r->id?>" class="btn btn-danger">Xóa</a>
+            </td>
+        </tr>
+    <?php endforeach;?>
     </tbody>
 </table>

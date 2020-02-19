@@ -22,16 +22,27 @@ class DepartmentController extends BaseController
             $name = $_POST['name'];
 
             $depart = Department::add($name);
-            if ($depart){
-                echo"<h3>Them thanh công</h3>>";
-            }
         }
         $this->render('add');
     }
 
-    public function delete($id){
-        $department = Department::delete($_GET['id'] = $id);
+    public function show(){
+        $id = $_GET['id'];
+        $department = Department::find($id);
         $data = array('department' => $department);
+
+        if (isset($_POST['update_depart'])){
+            $name = $_POST['name'];
+            $db = Department::update($id, $name);
+        }
+
+        $this->render('show', $data);
+    }
+
+    public function delete(){
+        $id = $_GET['id'];
+        $db = Department::del($id);
+        $data = array('department' => $db);
         $this->render('index', $data);
     }
 }

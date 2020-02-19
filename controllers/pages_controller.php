@@ -13,11 +13,11 @@ class PagesController extends BaseController
 
     public function home(){
         if (isset($_POST['login'])){
-           $username = $_POST['username'];
-           $password = md5($_POST['password']);
+            $username = $_POST['username'];
+            $password = md5($_POST['password']);
 
             if ($db = Staff::login($username, $password)){
-                header('Location:index.php?controller=department&action=index');
+                header('location:index.php?controller=department&action=index');
             }
         }
         $this->render('home');

@@ -44,6 +44,6 @@
         <input type="email" class="form-control" name="email" value="<?php echo $staff->email ?>">
     </div>
     <div class="form-group col-md-4 text-center">
-        <button type="submit" name="" class="btn btn-success">Back</button>
+        <a href="index.php?controller=staff&action=index" class="btn btn-success">Back</a>
     </div>
 </form>

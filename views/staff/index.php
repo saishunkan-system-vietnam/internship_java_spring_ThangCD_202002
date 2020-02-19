@@ -27,7 +27,7 @@
         <a href="<?php echo'index.php?controller=staff&action=add'?>" class="btn btn-info">Thêm mới nhân viên</a>
     </div>
     <div class="col-md-9">
-        <form class="form-inline" action="">
+        <form class="form-inline" action="" method="post">
             <label for="email">Tên:</label>
             <input type="text" class="form-control" placeholder="Nhập tên" name="">
             <label for="pwd">Phòng:</label>
@@ -60,7 +60,7 @@
         <td><?php echo $s->phone ?></td>
         <td><?php echo $s->email ?></td>
         <td>
-            <a href="<?php echo"index.php?controller=staff&action=show&id='$s->id'" ?>" class="btn btn-primary">Xem</a>
+            <a href="index.php?controller=staff&action=show&id=<?php echo $s->id?>" class="btn btn-primary">Xem</a>
             <a href="" class="btn btn-secondary">Sửa</a>
             <a href="" class="btn btn-danger">Xóa</a>
         </td>

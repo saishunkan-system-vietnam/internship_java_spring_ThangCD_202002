@@ -50,13 +50,14 @@ class Staff
 
     }
 
-    public function add($id_department,$username, $password, $fullname, $birthday,$phone, $email){
+    public function add($id_department,$username, $password, $fullname, $birthday, $phone, $email){
         $db = DB::getInstance();
         if ($id_department == '' || $username == '' || $password == '' || $fullname == '' || $birthday == '' || $email == ''){
             return false;
         }else{
             $req = $db->prepare("INSERT INTO staff(id,id_department,username, password, fullname, birthday, phone,email) VALUES (null, '$id_department', '$username', '$password', '$fullname', '$birthday', '$phone', '$email')");
             $req->execute();
+            header("location:index.php?controller=staff&action=index");
         }
     }
 
@@ -65,8 +66,8 @@ class Staff
     }
 
     public function login($username, $password){
-        $db = DB::getInstance();
+       $db = DB::getInstance();
        $req = $db->prepare("SELECT * FROM staff WHERE username = '$username' AND password='$password'");
-       $req->execute([$username, $password]);
+       $req->execute();
     }
 }

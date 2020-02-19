@@ -276,11 +276,27 @@
         <div class="fadeIn first" style="padding: 20px;">
             <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="LOGIN" />
         </div>
-
+        <?php
+        $errUsername = $errPassword = '';
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if(empty($_POST["username"])) {
+                $errUsername='Mời bạn nhập tên';
+            } else {
+                $username =  $_POST["username"];
+            }
+            if(empty($_POST["password"])) {
+                $errPassword='Mời bạn nhập mật khẩu';
+            } else {
+                $password =  $_POST["password"];
+            }
+        }
+        ?>
         <!-- Login Form -->
         <form METHOD="POST" enctype="multipart/form-data">
-            <input type="text" id="username" class="fadeIn second" name="username" placeholder="Username">
-            <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password">
+            <input type="text" id="username" class="fadeIn second" name="username" placeholder="Username"></br>
+            <span style="color: red"><?php echo $errUsername?></span>
+            <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password"></br>
+            <span style="color: red"><?php echo $errPassword?></span></br>
             <input type="submit" name="login" class="fadeIn fourth" value="Log In">
         </form>
 

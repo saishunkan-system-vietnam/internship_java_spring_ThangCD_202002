@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     if(empty($_POST["phone"])) {
         $errPhone='Bạn chưa nhập số điện thoại';
-    } elseif(!preg_match("/((09|03|07|08|05)+([0-9]{8})\b)/g",$phone)) {
+    } elseif(!preg_match("/((09|03|07|08|05)+([0-9]{8})\b)/",$phone)) {
         $errPhone = "Số điện thoại không đúng định dạng, mời nhập lại";
     } else{
         $phone = $_POST['phone'];

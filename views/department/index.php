@@ -38,8 +38,8 @@
             <td><?php echo $d->name ?></td>
             <td>
                 <a href="" class="btn btn-primary">Xem</a>
-                <a href="" class="btn btn-secondary">Sửa</a>
-                <a href="index.php?controller=department&action=index&id=<?php echo $d->id?>" class="btn btn-danger">Xóa</a>
+                <a href="index.php?controller=department&action=show&id=<?php echo $d->id?>" class="btn btn-secondary">Sửa</a>
+                <a href="index.php?controller=department&action=delete&id=<?php echo $d->id?>" class="btn btn-danger">Xóa</a>
             </td>
         </tr>
     <?php endforeach;?>

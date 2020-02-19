@@ -37,9 +37,6 @@ class StaffController extends BaseController
             $email = $_POST['email'];
 
             $db = Staff::add($id_department,$username,$password,$fullname,$birthday,$phone,$email);
-            if($db){
-               alert('thêm mới thanh công');
-            }
 
         }
        $this->render('add', $data);

@@ -1,6 +1,6 @@
 <?php
 $controllers = array(
-    'pages' => ['login', 'error', 'forgotpassword'],
+    'pages' => ['login','logout', 'error', 'forgotpassword'],
     'department' => ['index', 'show', 'add', 'delete'],
     'staff' => ['index', 'show', 'add', 'delete', 'search'],
 );

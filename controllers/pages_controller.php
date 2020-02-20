@@ -1,7 +1,6 @@
 <?php
 require_once ('controllers/base_controller.php');
 require_once ('models/staff.php');
-require_once ('config.php');
 
 class PagesController extends BaseController
 {
@@ -12,19 +11,29 @@ class PagesController extends BaseController
     }
 
     public function login(){
-        $staff = Staff::all();
-        print_r($staff);
-        if (!empty($_POST['login'])){
+        if (isset($_POST['username']) && isset($_POST['password'])){
             $username = $_POST['username'];
             $password = md5($_POST['password']);
-                $result = Staff::login($username,$password);
+            if (!$username || !$password){
+                echo '<script> alert("Bạn chưa nhập thông tin");</script>';
+            }else{
+                $result = Staff::login($username, $password);
+                var_dump($result);
                 if ($result){
-                    echo "Chúc mừng bạn đăng nhập thành công .";
+                    session_start();
+                    $_SESSION['username'] = $username;
+                    header('Location:index.php?controller=staff&action=index');
                 }else{
-                    echo "Sai thông tin đăng nhập";
+                    echo '<script>alert("Sai thông tin đăng nhập. Mời nhập lại");</script>';
                 }
             }
+
+        }
         $this->render('home');
+    }
+
+    public function logout(){
+        Staff::logout();
     }
 
     public function error(){

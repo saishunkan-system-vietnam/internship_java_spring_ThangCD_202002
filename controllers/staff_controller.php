@@ -49,17 +49,19 @@ class StaffController extends BaseController
             $phone = $_POST['phone'];
             $email = $_POST['email'];
 
-            $db = Staff::add($id_department,$username,$password,$fullname,$birthday,$phone,$email);
+            Staff::add($id_department,$username,$password,$fullname,$birthday,$phone,$email);
 
         }
        $this->render('add', $data);
     }
-
     public function search(){
-        $sear = $_GET['keyword'];
-        $result = Staff::search($sear);
-        var_dump($result);
-        $data = array('result' => $result);
+
+        if (isset($_GET['keyword'])){
+            $key =  $_GET['keyword'];
+            $result = Staff::search($key);
+            $data = array('result' => $result);
+        }
+
         $this->render('search', $data);
     }
 
@@ -72,4 +74,5 @@ class StaffController extends BaseController
             Staff::delete($id);
         }
     }
+
 }

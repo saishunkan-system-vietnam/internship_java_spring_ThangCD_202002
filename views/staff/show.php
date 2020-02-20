@@ -21,11 +21,11 @@
         </ul>
     </div>
 </nav>
-<h2>Thông tin nhân viên <?php echo $staff->fullname?></h2>
+<h2>Thông tin nhân viên <?php echo $staff['fullname']?></h2>
 <form action="" method="post" enctype="multipart/form-data">
     <div class="form-group col-md-4">
         <label for="inputAddress">Tên đăng nhập</label>
-        <input type="text" class="form-control" name="username" value="<?php echo $staff->username ?>">
+        <input type="text" class="form-control" name="username" value="<?php echo $staff['username'] ?>">
     </div>
     <div class="form-group col-md-4">
         <label for="inputAddress">Phòng</label>

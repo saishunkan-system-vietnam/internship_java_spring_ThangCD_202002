@@ -1,5 +1,8 @@
 <?php
 require_once 'config.php';
+if(!isset($_SESSION)){
+    session_start();
+}
 class Staff
 {
     public $id;
@@ -12,7 +15,7 @@ class Staff
     public $email;
 
 
-    function __construct($id, $id_department, $username, $password, $fullname, $birthday, $phone, $email)
+    public function __construct($id, $id_department, $username, $password, $fullname, $birthday, $phone, $email)
     {
         $this->id = $id;
         $this->id_department = $id_department;
@@ -26,13 +29,12 @@ class Staff
 
     public function all()
     {
-        $list = [];
         $db = DB::getInstance();
         $req = $db->query('SELECT * FROM staff');
-
-        foreach ($req->fetchAll() as $item) {
-            $list[] = new Staff($item['id'], $item['id_department'], $item['username'], $item['password'], $item['fullname'],$item['birthday'], $item['phone'], $item['email']);
-        }
+        $list = $req->fetchAll();
+//        foreach ($req->fetchAll() as $item) {
+//            $list[] = new Staff($item['id'], $item['id_department'], $item['username'], $item['password'], $item['fullname'],$item['birthday'], $item['phone'], $item['email']);
+//        }
 
         return $list;
     }
@@ -44,7 +46,7 @@ class Staff
 
         $item = $req->fetch();
         if (isset($item['id'])){
-            return new Staff($item['id'], $item['id_department'], $item['username'], $item['password'], $item['fullname'],$item['birthday'], $item['phone'], $item['email']);
+            return new Staff($item['id'], $item['id_department'], $item['username'],  $item['password'], $item['fullname'], $item['birthday'], $item['phone'], $item['email']);
         }
         return null;
 
@@ -72,7 +74,7 @@ class Staff
     public function delete($id){
         $db = DB::getInstance();
 
-        $req = $db->prepare("DELETE FROM staff WHERE id = '$id'");
+        $req = $db->prepare("DELETE FROM staff  WHERE id = '$id'");
         if ($req->execute()){
             header('location:index.php?controller=staff&action=index');
         }
@@ -80,15 +82,24 @@ class Staff
 
     public function login($username, $password){
        $db = DB::getInstance();
-       $req = $db->prepare("SELECT * FROM staff WHERE username = '".$username."' AND password = '".$password."' ");
+       $req = $db->prepare("SELECT * FROM staff WHERE username = '$username' AND password = '$password'");
        $req->execute();
+       $result = $req->fetchAll();
+       return $result;
 
+    }
+
+    public function logout() {
+        session_unset($_SESSION['username']);
+        session_destroy();
+        header('Location:index.php');
     }
 
     public function search($key){
         $db = DB::getInstance();
-
-        $req = $db->prepare("SELECT * FORM staff WHERE username REGEXP '$key' OR fullname REGEXP '$key'");
+        $req = $db->prepare("SELECT * FROM staff WHERE username LIKE '%$key%' OR fullname LIKE '$key' OR phone LIKE '$key' OR email LIKE '$key'");
         $req->execute();
+        $result = $req->fetchAll();
+        return $result;
     }
 }

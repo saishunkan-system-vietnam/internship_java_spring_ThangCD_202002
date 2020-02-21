@@ -1,11 +1,11 @@
 <?php
-    if(!isset($_SESSION))
-    {
-        session_start();
-    }
-    if (isset($_SESSION["username"])){
-        $name_s = $_SESSION["username"];
-    }
+if(!isset($_SESSION))
+{
+    session_start();
+}
+if (isset($_SESSION["username"])){
+    $name_s = $_SESSION["username"];
+}
 ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="index.php?controller=pages&action=home">Home</a>

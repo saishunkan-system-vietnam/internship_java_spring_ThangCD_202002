@@ -281,7 +281,6 @@
             <input type="email" id="email" class="fadeIn second" name="email" placeholder="Email"></br>
             <input type="submit" class="fadeIn fourth" name="forgot" value="SEND">
         </form>
-
         <!-- hom page-->
         <div id="formFooter">
             <a class="underlineHover" href="index.php">Home</a>

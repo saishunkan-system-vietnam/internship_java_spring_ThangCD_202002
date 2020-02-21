@@ -33,7 +33,7 @@ include_once 'views/nav.php';
         <?php foreach ($staff as $s):?>
             <tr>
                 <td><?php echo $s['fullname'] ?></td>
-                <td><?php echo $s['id_department'] ?></td>
+                <td><?php echo $s['name'] ?></td>
                 <td><?php echo $s['username'] ?></td>
                 <td><?php echo $s['birthday'] ?></td>
                 <td><?php echo '0'.$s['phone'] ?></td>

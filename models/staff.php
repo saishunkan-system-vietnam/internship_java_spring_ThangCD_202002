@@ -30,12 +30,8 @@ class Staff
     public function all()
     {
         $db = DB::getInstance();
-        $req = $db->query('SELECT * FROM staff');
+        $req = $db->query('SELECT staff.id, fullname, name, username, birthday, phone, email FROM staff LEFT JOIN department ON staff.id_department = department.id');
         $list = $req->fetchAll();
-//        foreach ($req->fetchAll() as $item) {
-//            $list[] = new Staff($item['id'], $item['id_department'], $item['username'], $item['password'], $item['fullname'],$item['birthday'], $item['phone'], $item['email']);
-//        }
-
         return $list;
     }
 
@@ -97,7 +93,7 @@ class Staff
 
     public function search($key){
         $db = DB::getInstance();
-        $req = $db->prepare("SELECT * FROM staff WHERE username LIKE '%$key%' OR fullname LIKE '$key' OR phone LIKE '$key' OR email LIKE '$key'");
+        $req = $db->prepare("SELECT fullname, name, username, birthday, phone, email FROM staff LEFT JOIN department ON staff.id_department = department.id WHERE username LIKE '%$key%' OR fullname LIKE '$key' OR phone LIKE '$key' OR email LIKE '$key' OR department.name LIKE '$key'");
         $req->execute();
         $result = $req->fetchAll();
         return $result;

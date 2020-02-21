@@ -41,6 +41,7 @@ class PagesController extends BaseController
     }
 
     function forgotpassword(){
+        $message = 'fsfsferrs';
         if(isset($_POST['email']) || (!empty($_POST['email']))){
             $email = $_POST['email'];
             $email = filter_var($email, FILTER_SANITIZE_EMAIL);
@@ -59,7 +60,7 @@ class PagesController extends BaseController
                 $subject = "Reset password";
                 $message = "Su dung mat khau moi de dang nhap :".$res_password;
                 $headers = 'From: testemailsaishunkan@gmail.com';
-                if (mail($to, $subject, $message,$headers)){
+                if (mail($to, $subject, $message, $headers)){
                     echo "<br>Mat khau da duoc gui den email<br>";
                 }else{
                     echo "Fail";

@@ -35,7 +35,7 @@ include_once 'views/nav.php';
             <?php foreach ($result as $r):?>
                 <tr>
                     <td><?php echo $r['fullname'] ?></td>
-                    <td><?php echo $r['id_department'] ?></td>
+                    <td><?php echo $r['name'] ?></td>
                     <td><?php echo $r['birthday'] ?></td>
                     <td><?php echo '0'.$r['phone'] ?></td>
                     <td><?php echo $r['email'] ?></td>

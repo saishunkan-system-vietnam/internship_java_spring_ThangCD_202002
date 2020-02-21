@@ -14,12 +14,14 @@ class StaffController extends BaseController
     public function index()
     {
         $staff = Staff::all();
+        var_dump($staff);
         $data = array('staff' => $staff);
         $this->render('index', $data);
     }
 
     public function show(){
         $depart = Department::all();
+//        var_dump($depart);
         $id = $_GET['id'];
         $staff = Staff::find($_GET['id']);
         $data = array('staff' => $staff, 'depart' => $depart);

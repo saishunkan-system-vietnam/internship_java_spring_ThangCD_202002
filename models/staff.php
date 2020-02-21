@@ -102,4 +102,13 @@ class Staff
         $result = $req->fetchAll();
         return $result;
     }
+
+    public function reset($email){
+        $db = DB::getInstance();
+        $req = $db->prepare("SELECT * FROM staff WHERE email = '$email'");
+        $req->bindParam(":email",$email);
+        $req->execute();
+        $result = $req->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
 }

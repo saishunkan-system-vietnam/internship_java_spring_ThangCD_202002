@@ -41,23 +41,34 @@ class PagesController extends BaseController
     }
 
     function forgotpassword(){
-        if(isset($_POST['forgot']))
-        {
-            $email=$_POST['email'];
-            $que=$this->db->query("select email,password from staff where email='$email'");
-            $row=$que->row();
-            $user_email=$row->email;
-            if((!strcmp($email, $user_email))){
-                $pass=$row->pass;
-                /*Mail Code*/
-                $to = $user_email;
-                $subject = "Password";
-                $txt = "Your password is $pass .";
-                $headers = "From: password@example.com" . "\r\n" .
-                    "CC: ifany@example.com";
-                mail($to,$subject,$txt,$headers);
+        if(isset($_POST['email']) || (!empty($_POST['email']))){
+            $email = $_POST['email'];
+            $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+            $result = Staff::reset($email);
+            if ($result){
+                print_r($result);
+                echo"<br>";
+                $res_password = rand(100000,999999);
+                $password_hash = md5($res_password);
+                $db = DB::getInstance();
+                $req_up = $db->prepare("UPDATE staff SET password='$password_hash' WHERE email='$email'");
+                $req_up->execute();
+                echo "<br>";
+                print_r($res_password);
+                $to = $email;
+                $subject = "Reset password";
+                $message = "Su dung mat khau moi de dang nhap :".$res_password;
+                $headers = 'From: testemailsaishunkan@gmail.com';
+                if (mail($to, $subject, $message,$headers)){
+                    echo "<br>Mat khau da duoc gui den email<br>";
+                }else{
+                    echo "Fail";
+                }
+            }else{
+                echo 'Fail';
             }
         }
+
         $this->render('forgot_pass');
     }
 }

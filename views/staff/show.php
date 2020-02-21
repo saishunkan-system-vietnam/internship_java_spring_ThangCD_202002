@@ -1,31 +1,11 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="<?php echo 'index.php?controller=pages&action=home'?>">Home</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="<?php echo 'index.php?controller=department&action=index' ?>">Phòng ban <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo 'index.php?controller=staff&action=index' ?>">Nhân vien</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Giới thiệu</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Liên hệ</a>
-            </li>
-        </ul>
-    </div>
-</nav>
-<h2>Thông tin nhân viên <?php echo $staff['fullname']?></h2>
+<?php
+include_once 'views/nav.php';
+?>
+<h2>Thông tin nhân viên <?php echo $staff->fullname?></h2>
 <form action="" method="post" enctype="multipart/form-data">
     <div class="form-group col-md-4">
         <label for="inputAddress">Tên đăng nhập</label>
-        <input type="text" class="form-control" name="username" value="<?php echo $staff['username'] ?>">
+        <input type="text" class="form-control" name="username" value="<?php echo $staff->username ?>">
     </div>
     <div class="form-group col-md-4">
         <label for="inputAddress">Phòng</label>

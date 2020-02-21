@@ -279,7 +279,7 @@
         <!-- Login Form -->
         <form METHOD="POST" action="">
             <input type="email" id="email" class="fadeIn second" name="email" placeholder="Email"></br>
-            <input type="submit" name="fogot" class="fadeIn fourth" name="forgot" value="SEND">
+            <input type="submit" class="fadeIn fourth" name="forgot" value="SEND">
         </form>
 
         <!-- hom page-->

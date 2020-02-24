@@ -14,28 +14,31 @@ class StaffController extends BaseController
     public function index()
     {
         $staff = Staff::all();
-        var_dump($staff);
         $data = array('staff' => $staff);
         $this->render('index', $data);
     }
 
     public function show(){
         $depart = Department::all();
-//        var_dump($depart);
-        $id = $_GET['id'];
-        $staff = Staff::find($_GET['id']);
-        $data = array('staff' => $staff, 'depart' => $depart);
+        $id = is_numeric($_GET['id']);
+        if ($id == ''){
+            header('Location:index.php?controller=staff&action=index');
+        }else{
+            $staff = Staff::find($_GET['id']);
+            $data = array('staff' => $staff, 'depart' => $depart);
 
-        if (isset($_POST['update_staff'])){
-            $id_department = $_POST['id_department'];
-            $username = $_POST['username'];
-            $password = md5($_POST['password']);
-            $fullname = $_POST['fullname'];
-            $birthday = $_POST['birthday'];
-            $phone = $_POST['phone'];
-            $email = $_POST['email'];
-            Staff::update($id, $id_department, $username, $password, $fullname, $birthday, $phone, $email);
+            if (isset($_POST['update_staff'])){
+                $id_department = $_POST['id_department'];
+                $username = $_POST['username'];
+                $password = md5($_POST['password']);
+                $fullname = $_POST['fullname'];
+                $birthday = $_POST['birthday'];
+                $phone = $_POST['phone'];
+                $email = $_POST['email'];
+                Staff::update($id, $id_department, $username, $password, $fullname, $birthday, $phone, $email);
+            }
         }
+
         $this->render('show', $data);
     }
 

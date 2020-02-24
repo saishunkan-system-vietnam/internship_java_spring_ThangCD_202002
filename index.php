@@ -9,9 +9,12 @@ if (isset($_GET['controller']) && isset($_SESSION['username'])) {
     } else {
         $action = 'index.php';
     }
-} else {
+} elseif (isset($_GET['action']) == 'login'){
     $controller = 'pages';
     $action = 'login';
+}else {
+    $controller = 'pages';
+    $action = 'forgotpassword';
 }
 require_once('route.php');
 

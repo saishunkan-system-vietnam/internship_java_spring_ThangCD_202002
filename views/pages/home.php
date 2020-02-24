@@ -25,7 +25,7 @@
 
         ?>
         <!-- Login Form -->
-        <form METHOD="POST" enctype="multipart/form-data">
+        <form METHOD="POST">
             <input type="text" id="username" class="fadeIn second" name="username" placeholder="Username"></br>
             <span style="color: red"><?php echo $errUsername?></span>
             <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password"></br>

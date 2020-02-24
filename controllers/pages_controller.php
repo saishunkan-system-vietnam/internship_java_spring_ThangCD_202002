@@ -18,7 +18,6 @@ class PagesController extends BaseController
                 echo '<script> alert("Bạn chưa nhập thông tin");</script>';
             }else{
                 $result = Staff::login($username, $password);
-                var_dump($result);
                 if ($result){
                     session_start();
                     $_SESSION['username'] = $username;
@@ -61,12 +60,12 @@ class PagesController extends BaseController
                 $message = "Su dung mat khau moi de dang nhap :".$res_password;
                 $headers = 'From: testemailsaishunkan@gmail.com';
                 if (mail($to, $subject, $message, $headers)){
-                    echo "<br>Mat khau da duoc gui den email<br>";
+                    echo "<br>Mật khẩu được gửi đến email của bạn.<br>";
                 }else{
-                    echo "Fail";
+                    echo "Vui lòng nhập eamil đăng ký để cấp lại mật khẩu";
                 }
             }else{
-                echo 'Fail';
+                echo 'Không được để trống';
             }
         }
 

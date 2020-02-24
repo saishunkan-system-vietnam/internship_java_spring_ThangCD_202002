@@ -1,2 +1,3 @@
 <?php
-    echo 'Co loi xay ra';
+//    echo 'Co loi xay ra';
+header('location:index.php');

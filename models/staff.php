@@ -88,12 +88,12 @@ class Staff
     public function logout() {
         session_unset($_SESSION['username']);
         session_destroy();
-        header('Location:index.php');
+        header('Location:index.php?controller=pages&action=login');
     }
 
     public function search($key){
         $db = DB::getInstance();
-        $req = $db->prepare("SELECT fullname, name, username, birthday, phone, email FROM staff LEFT JOIN department ON staff.id_department = department.id WHERE username LIKE '%$key%' OR fullname LIKE '$key' OR phone LIKE '$key' OR email LIKE '$key' OR department.name LIKE '$key'");
+        $req = $db->prepare("SELECT fullname, name, username, birthday, phone, email FROM staff LEFT JOIN department ON staff.id_department = department.id WHERE username LIKE '%$key%' OR fullname LIKE '%$key%' OR phone LIKE '%$key%' OR email LIKE '%$key%' OR department.name LIKE '%$key%'");
         $req->execute();
         $result = $req->fetchAll();
         return $result;

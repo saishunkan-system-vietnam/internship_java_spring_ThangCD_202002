@@ -1,20 +1,20 @@
 <?php
+
 require_once('config.php');
 session_start();
 
-if (isset($_GET['controller']) && isset($_SESSION['username'])) {
+if (isset($_GET['controller']) && isset($_SESSION['username'])){
     $controller = $_GET['controller'];
     if (isset($_GET['action'])) {
         $action = $_GET['action'];
-    } else {
+    }else{
         $action = 'index.php';
     }
-} elseif (isset($_GET['action']) == 'login'){
+}elseif(isset($_GET['action'])) {
+    $controller = 'pages';
+    $action = $_GET['action'];
+}else{
     $controller = 'pages';
     $action = 'login';
-}else {
-    $controller = 'pages';
-    $action = 'forgotpassword';
 }
 require_once('route.php');
-

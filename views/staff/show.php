@@ -29,7 +29,7 @@ include_once 'views/nav.php';
     </div>
     <div class="form-group col-md-4">
         <label for="inputAddress">Số điện thoại</label>
-        <input type="text" class="form-control" name="phone" value="<?php echo '0'.$staff->phone ?>">
+        <input type="text" class="form-control" name="phone" value="<?php echo $staff->phone ?>">
     </div>
     <div class="form-group col-md-4">
         <label for="inputAddress">Email</label>

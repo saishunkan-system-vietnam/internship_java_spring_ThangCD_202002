@@ -1,7 +1,9 @@
 <?php
 
 require_once('config.php');
-session_start();
+if (!isset($_SESSION['username'])){
+    session_start();
+}
 
 if (isset($_GET['controller']) && isset($_SESSION['username'])){
     $controller = $_GET['controller'];

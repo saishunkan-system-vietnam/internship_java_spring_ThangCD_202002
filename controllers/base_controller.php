@@ -17,4 +17,9 @@ class BaseController
         }
     }
 
+    function  check($string){
+        $ketqua  = preg_replace('/[^a-zA-Z0-9\{\ \.\_\}]+/u', '', strip_tags($string));
+        return $ketqua;
+    }
+
 }

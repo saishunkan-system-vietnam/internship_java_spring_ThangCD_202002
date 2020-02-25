@@ -26,10 +26,14 @@
         ?>
         <!-- Login Form -->
         <form METHOD="POST">
-            <input type="text" id="username" class="fadeIn second" name="username" placeholder="Username"></br>
+            <input type="text" id="username" class="fadeIn second" name="username" placeholder="Username" value="<?php if (isset($_COOKIE['r_username'])){ echo $_COOKIE['r_username']; }?>"></br>
             <span style="color: red"><?php echo $errUsername?></span>
-            <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password"></br>
+            <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password" value="<?php if (isset($_COOKIE['r_password'])){ echo  $_COOKIE['r_password']; }?>"></br>
             <span style="color: red"><?php echo $errPassword?></span></br>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" name="check" <?php if (isset($_COOKIE['r_username'])){echo 'checked'; }?>>
+                <label class="form-check-label" for="exampleCheck1">Remember me</label>
+            </div>
             <input type="submit" class="fadeIn fourth" value="Log In">
         </form>
 

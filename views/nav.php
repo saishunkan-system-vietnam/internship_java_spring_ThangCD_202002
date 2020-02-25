@@ -18,7 +18,7 @@ if (isset($_SESSION["username"])){
                 <a class="nav-link" href="index.php?controller=department&action=index">Phòng ban <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="index.php?controller=staff&action=index">Nhân vien</a>
+                <a class="nav-link" href="index.php?controller=staff&action=index">Nhân viên</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Giới thiệu</a>
@@ -33,7 +33,7 @@ if (isset($_SESSION["username"])){
                     </button>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="#">Thông tin</a>
-                        <a class="dropdown-item" href="index.php?controller=pages&action=logout">Đăng xuất</a>
+                        <a class="dropdown-item" href="index.php?controller=pages&action=logout" onclick="confirm('Bạn muốn đăng xuất ?')">Đăng xuất</a>
                     </div>
                 </div>
             </li>

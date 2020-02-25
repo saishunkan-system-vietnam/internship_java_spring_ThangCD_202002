@@ -53,7 +53,7 @@ class Staff
         if ($id_department == '' || $username == '' || $password == '' || $fullname == '' || $birthday == '' || $email == ''){
             return false;
         }else{
-            $req = $db->prepare("INSERT INTO staff(id,id_department,username, password, fullname, birthday, phone,email) VALUES (null, '$id_department', '$username', '$password', '$fullname', '$birthday', '$phone', '$email')");
+            $req = $db->prepare("INSERT INTO staff(id,id_department,username, password, fullname, birthday, phone,email) VALUES (null, '" .$id_department. "', '" .$username. "', '" .$password. "', '" .$fullname. "', '" .$birthday. "', '" .$phone. "', '" .$email. "')");
             $req->execute();
             header("location:index.php?controller=staff&action=index");
         }
@@ -93,7 +93,7 @@ class Staff
 
     public function search($key){
         $db = DB::getInstance();
-        $req = $db->prepare("SELECT fullname, name, username, birthday, phone, email FROM staff LEFT JOIN department ON staff.id_department = department.id WHERE username LIKE '%$key%' OR fullname LIKE '%$key%' OR phone LIKE '%$key%' OR email LIKE '%$key%' OR department.name LIKE '%$key%'");
+        $req = $db->prepare("SELECT fullname, name, username, birthday, phone, email FROM staff LEFT JOIN department ON staff.id_department = department.id WHERE username LIKE '%$key%' OR fullname LIKE '%$key%' OR birthday LIKE '%$key%' OR phone LIKE '%$key%' OR email LIKE '%$key%' OR department.name LIKE '%$key%'");
         $req->execute();
         $result = $req->fetchAll();
         return $result;

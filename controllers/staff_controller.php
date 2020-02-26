@@ -16,6 +16,9 @@ class StaffController extends BaseController
         $staff = Staff::all();
         $data = array('staff' => $staff);
         $this->render('index', $data);
+        //Paginate
+        $total = Staff::paginate();
+        echo $total;
     }
 
     public function show(){
@@ -24,7 +27,7 @@ class StaffController extends BaseController
         if ($id == ''){
             header('Location:index.php?controller=staff&action=index');
         }else{
-            $staff = Staff::find($_GET['id']);
+            $staff = Staff::find($id);
             $data = array('staff' => $staff, 'depart' => $depart);
 
             if (isset($_POST['update_staff'])){
@@ -74,7 +77,7 @@ class StaffController extends BaseController
         if (isset($_GET['key_name']) || isset($_GET['key_part']) || isset($_GET['key_user']) || isset($_GET['key_date']) || isset($_GET['key_phone']) || isset($_GET['key_email'])){
             $arr = array(
                 'keyname' => htmlspecialchars($_GET['key_name'], ENT_QUOTES, 'UTF-8'),
-                'keydepart' => $this->check($_GET['key_depart']),
+                'keydepart' => htmlspecialchars($_GET['key_depart'], ENT_QUOTES, 'UTF-8'),
                 'keyuser' => htmlspecialchars($_GET['key_user'], ENT_QUOTES, 'UTF-8'),
                 'keydate' => $_GET['key_date'],
                 'keyphone' => $this->check($_GET['key_phone']),
@@ -82,13 +85,19 @@ class StaffController extends BaseController
             );
             $where = array();
             if ($arr['keyname']){
-                $where[] = "fullname LIKE '%{$arr['keyname']}%'";
+                $parttens = array('%','_');
+                $replace = array('\%','\_');
+                $r = str_replace($parttens,$replace,$arr['keyname']);
+                $where[] = "fullname LIKE '%$r%'" ;
             }
             if ($arr['keydepart']){
                 $where[] = "department.name LIKE '%{$arr['keydepart']}%'";
             }
             if ($arr['keyuser']){
-                $where[] = "username LIKE '%{$arr['keyuser']}%'";
+                $parttens = array('%','_');
+                $replace = array('\%','\_');
+                $r = str_replace($parttens,$replace,$arr['keyuser']);
+                $where[] = "username LIKE '%$r%'" ;
             }
             if ($arr['keydate']){
                 $where[] = "birthday LIKE '%{$arr['keydate']}%'";
@@ -124,6 +133,9 @@ class StaffController extends BaseController
             $id = $_GET['id'];
             Staff::delete($id);
         }
+    }
+    public function page(){
+       Staff::paginate();
     }
 
 }

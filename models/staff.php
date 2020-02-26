@@ -30,7 +30,7 @@ class Staff
     public function all()
     {
         $db = DB::getInstance();
-        $req = $db->query('SELECT staff.id, fullname, name, username, birthday, phone, email FROM staff LEFT JOIN department ON staff.id_department = department.id');
+        $req = $db->query('SELECT staff.id, fullname, name, username, birthday, phone, email FROM staff LEFT JOIN department ON staff.id_department = department.id LIMIT 5');
         $list = $req->fetchAll();
         return $list;
     }
@@ -93,7 +93,7 @@ class Staff
 
     public function search($key){
         $db = DB::getInstance();
-        $req = $db->prepare("SELECT fullname, name, username, birthday, phone, email FROM staff LEFT JOIN department ON staff.id_department = department.id WHERE username LIKE '%$key%' OR fullname LIKE '%$key%' OR birthday LIKE '%$key%' OR phone LIKE '%$key%' OR email LIKE '%$key%' OR department.name LIKE '%$key%'");
+        $req = $db->prepare("SELECT fullname, name, username, birthday, phone, email FROM staff LEFT JOIN department ON staff.id_department = department.id WHERE username LIKE '%$key%' OR fullname LIKE '$key' OR birthday LIKE '%$key%' OR phone LIKE '%$key%' OR email LIKE '%$key%' OR department.name LIKE '%$key%'");
         $req->execute();
         $result = $req->fetchAll();
         return $result;
@@ -106,5 +106,12 @@ class Staff
         $req->execute();
         $result = $req->fetch(PDO::FETCH_ASSOC);
         return $result;
+    }
+
+    public function  paginate(){
+        $db = DB::getInstance();
+        $req = $db->query('SELECT count(*) FROM staff');
+        $req->execute();
+        $number_of_rows = $req->fetchColumn();
     }
 }

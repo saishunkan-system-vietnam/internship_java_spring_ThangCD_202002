@@ -1,5 +1,31 @@
 <?php
 include_once 'views/nav.php';
+
+include_once 'config.php';
+$db = DB::getInstance();
+$res = $db->query('SELECT count(*) FROM staff');
+$res->execute();
+$total = $res->fetchColumn();//số bản ghi
+
+$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+$limit = 5;
+
+$total_page = ceil($total / $limit);
+
+
+if ($current_page > $total_page) {
+    $current_page = $total_page;
+} elseif ($current_page < 1) {
+    $current_page = 1;
+}
+
+$start = ($current_page - 1) * $limit;
+
+$kq = $db->prepare("SELECT staff.id, fullname, name, username, birthday, phone, email FROM staff LEFT JOIN department ON staff.id_department = department.id LIMIT $start, $limit");
+$kq->execute();
+$list = $kq->fetchAll();
+
 ?>
 <div style="padding: 0.5em 1em;">
     <h2>Danh sách nhân viên</h2>
@@ -57,7 +83,7 @@ include_once 'views/nav.php';
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($staff as $s):?>
+        <?php foreach ($list as $s):?>
             <tr>
                 <td><?php echo $s['fullname'] ?></td>
                 <td><?php echo $s['name'] ?></td>
@@ -74,4 +100,25 @@ include_once 'views/nav.php';
         <?php endforeach;?>
         </tbody>
     </table>
+
+    <div class="text-center">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <?php if ($current_page > 1 && $total_page > 1) {?>
+                    <a class="page-link" href="index.php?controller=staff&action=index&page=<?php echo $current_page - 1;?>">Previous</a>
+                    <?php }?>
+                </li>
+                <li class="page-item">
+                    <?php for ($i=1; $i <= $total_page; $i++){ ?>
+                    <a class="page-link" href="index.php?controller=staff&action=index&page=<?php echo $i ?>"><?php echo $i; ?></a></li>
+                <?php } ?>
+                <li class="page-item">
+                    <?php if ($current_page < $total_page && $total_page > 1){?>
+                    <a class="page-link" href="index.php?controller=staff&action=index&page=<?php echo $current_page + 1;?>">Next</a>
+                    <?php } ?>
+                </li>
+            </ul>
+        </nav>
+    </div>
 </div>
